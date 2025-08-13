@@ -1,0 +1,226 @@
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * UFPel theme dark preset.
+ *
+ * @package    theme_ufpel
+ * @copyright  2025 Universidade Federal de Pelotas
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+// ============================================================================
+// Dark Mode Color Scheme
+// ============================================================================
+
+// Dark mode base colors
+$gray-100: #1a1a1a !default;
+$gray-200: #2d2d2d !default;
+$gray-300: #404040 !default;
+$gray-400: #555555 !default;
+$gray-500: #6a6a6a !default;
+$gray-600: #808080 !default;
+$gray-700: #999999 !default;
+$gray-800: #b3b3b3 !default;
+$gray-900: #e6e6e6 !default;
+
+// UFPel Dark Brand Colors
+$ufpel-primary: #0066cc !default;      // Brighter blue for dark mode
+$ufpel-secondary: #3399ff !default;    // Lighter blue for dark mode
+$ufpel-success: #4caf50 !default;     // Brighter green
+$ufpel-info: #29b6f6 !default;        // Brighter cyan
+$ufpel-warning: #ffc947 !default;     // Adjusted yellow
+$ufpel-danger: #f44336 !default;      // Brighter red
+$ufpel-light: $gray-800 !default;     // Light text on dark
+$ufpel-dark: $gray-200 !default;      // Dark backgrounds
+
+// Override Bootstrap theme colors
+$primary: $ufpel-primary !default;
+$secondary: $ufpel-secondary !default;
+$success: $ufpel-success !default;
+$info: $ufpel-info !default;
+$warning: $ufpel-warning !default;
+$danger: $ufpel-danger !default;
+$light: $ufpel-light !default;
+$dark: $ufpel-dark !default;
+
+// Body
+$body-bg: $gray-100 !default;
+$body-color: $gray-900 !default;
+
+// Typography
+$font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$headings-color: #ffffff !default;
+$text-muted: $gray-600 !default;
+
+// Links
+$link-color: $ufpel-secondary !default;
+$link-hover-color: lighten($link-color, 10%) !default;
+
+// Components
+$component-active-bg: $primary !default;
+$component-active-color: #ffffff !default;
+
+// Borders
+$border-color: $gray-300 !default;
+
+// Cards
+$card-bg: $gray-200 !default;
+$card-border-color: $gray-300 !default;
+$card-cap-bg: rgba(255, 255, 255, 0.03) !default;
+
+// Dropdowns
+$dropdown-bg: $gray-200 !default;
+$dropdown-border-color: $gray-300 !default;
+$dropdown-divider-bg: $gray-300 !default;
+$dropdown-link-color: $gray-900 !default;
+$dropdown-link-hover-color: #ffffff !default;
+$dropdown-link-hover-bg: $gray-300 !default;
+
+// Navbar
+$navbar-dark-color: rgba(255, 255, 255, 0.8) !default;
+$navbar-dark-hover-color: rgba(255, 255, 255, 1) !default;
+$navbar-dark-active-color: #ffffff !default;
+$navbar-dark-bg: $gray-200 !default;
+
+// Pagination
+$pagination-bg: $gray-200 !default;
+$pagination-border-color: $gray-300 !default;
+$pagination-hover-bg: $gray-300 !default;
+$pagination-hover-border-color: $gray-400 !default;
+$pagination-disabled-bg: $gray-200 !default;
+
+// Forms
+$input-bg: $gray-200 !default;
+$input-border-color: $gray-300 !default;
+$input-color: $gray-900 !default;
+$input-focus-bg: $gray-200 !default;
+$input-focus-border-color: $primary !default;
+$input-focus-color: $gray-900 !default;
+$input-placeholder-color: $gray-600 !default;
+$input-disabled-bg: $gray-100 !default;
+
+$custom-select-bg: $gray-200 !default;
+$custom-select-color: $gray-900 !default;
+$custom-select-border-color: $gray-300 !default;
+$custom-select-indicator-color: $gray-600 !default;
+
+$custom-control-indicator-bg: $gray-200 !default;
+$custom-control-indicator-border-color: $gray-400 !default;
+
+// Buttons
+$btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 1px 1px rgba(0, 0, 0, 0.2) !default;
+
+// Tables
+$table-bg: transparent !default;
+$table-accent-bg: rgba(255, 255, 255, 0.05) !default;
+$table-hover-bg: rgba(255, 255, 255, 0.075) !default;
+$table-border-color: $gray-300 !default;
+$table-dark-bg: $gray-200 !default;
+$table-dark-border-color: $gray-300 !default;
+
+// List groups
+$list-group-bg: $gray-200 !default;
+$list-group-border-color: $gray-300 !default;
+$list-group-hover-bg: $gray-300 !default;
+$list-group-action-color: $gray-900 !default;
+$list-group-action-hover-color: #ffffff !default;
+$list-group-action-active-bg: $gray-300 !default;
+
+// Modals
+$modal-content-bg: $gray-200 !default;
+$modal-content-border-color: $gray-300 !default;
+$modal-header-border-color: $gray-300 !default;
+$modal-footer-border-color: $gray-300 !default;
+$modal-backdrop-bg: #000000 !default;
+$modal-backdrop-opacity: 0.7 !default;
+
+// Progress bars
+$progress-bg: $gray-300 !default;
+
+// Toasts
+$toast-background-color: rgba($gray-200, 0.95) !default;
+$toast-border-color: $gray-300 !default;
+$toast-header-background-color: rgba($gray-300, 0.95) !default;
+$toast-header-border-color: $gray-400 !default;
+
+// Badges
+$badge-color: #ffffff !default;
+
+// Breadcrumbs
+$breadcrumb-bg: $gray-200 !default;
+
+// Close
+$close-color: $gray-900 !default;
+
+// Code
+$code-color: #f06292 !default;
+$pre-color: $gray-900 !default;
+
+// HR
+$hr-border-color: $gray-300 !default;
+
+// ============================================================================
+// Import Bootstrap and Boost Components
+// ============================================================================
+
+// Import FontAwesome
+@import "../../boost/scss/fontawesome";
+
+// Import Bootstrap with dark theme colors
+@import "../../boost/scss/bootstrap";
+
+// Import core Moodle styles
+@import "../../boost/scss/moodle";
+
+// ============================================================================
+// Dark Mode Specific Overrides
+// ============================================================================
+
+// Additional dark mode specific styles
+.theme-dark {
+    // Syntax highlighting for code blocks
+    .hljs {
+        background: $gray-200;
+        color: $gray-900;
+    }
+    
+    // Activity icons inversion
+    .activityicon {
+        filter: invert(0.8);
+    }
+    
+    // Image dimming
+    img:not(.no-dim) {
+        opacity: 0.9;
+        
+        &:hover {
+            opacity: 1;
+        }
+    }
+    
+    // Shadow adjustments
+    .shadow-sm {
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    .shadow {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4) !important;
+    }
+    
+    .shadow-lg {
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5) !important;
+    }
+}

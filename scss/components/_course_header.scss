@@ -1,0 +1,394 @@
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Course header styles for UFPel theme
+ *
+ * @package    theme_ufpel
+ * @copyright  2025 Universidade Federal de Pelotas
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+// ============================================================================
+// Course Header Component
+// ============================================================================
+
+.ufpel-course-header-wrapper {
+    margin-bottom: var(--ufpel-spacing-lg);
+    
+    .ufpel-course-header {
+        position: relative;
+        min-height: 250px;
+        border-radius: var(--ufpel-radius-lg);
+        overflow: hidden;
+        background-color: var(--ufpel-primary);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        
+        // Responsive heights
+        @media (max-width: 768px) {
+            min-height: 200px;
+        }
+        
+        @media (max-width: 576px) {
+            min-height: 150px;
+            border-radius: var(--ufpel-radius-md);
+        }
+        
+        // Fallback gradient when no image
+        &.no-image {
+            background: linear-gradient(135deg, var(--ufpel-primary) 0%, var(--ufpel-secondary) 100%);
+        }
+        
+        // Background image container (deprecated - using CSS background now)
+        .ufpel-course-header-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            display: none; // Hide this as we're using CSS background
+            
+            .ufpel-course-header-bg-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                
+                // When image is loaded
+                &.loaded {
+                    opacity: 1;
+                }
+            }
+        }
+        
+        // Overlay for better text readability
+        &.has-overlay .ufpel-course-header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.1) 0%,
+                rgba(0, 0, 0, 0.3) 50%,
+                rgba(0, 0, 0, 0.6) 100%
+            );
+            z-index: 1;
+        }
+        
+        // Content container
+        .ufpel-course-header-content {
+            position: relative;
+            z-index: 2;
+            padding: var(--ufpel-spacing-xl) var(--ufpel-spacing-lg);
+            height: 100%;
+            min-height: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            
+            @media (max-width: 768px) {
+                padding: var(--ufpel-spacing-lg);
+            }
+            
+            @media (max-width: 576px) {
+                padding: var(--ufpel-spacing-md);
+            }
+            
+            // Breadcrumb navigation
+            .ufpel-course-breadcrumb {
+                margin-bottom: var(--ufpel-spacing-sm);
+                
+                .breadcrumb {
+                    background: transparent;
+                    padding: 0;
+                    margin: 0;
+                    
+                    .breadcrumb-item {
+                        color: rgba(255, 255, 255, 0.8);
+                        
+                        a {
+                            color: rgba(255, 255, 255, 0.9);
+                            text-decoration: none;
+                            transition: color var(--ufpel-transition-speed) var(--ufpel-transition-timing);
+                            
+                            &:hover {
+                                color: white;
+                                text-decoration: underline;
+                            }
+                        }
+                        
+                        &::before {
+                            color: rgba(255, 255, 255, 0.6);
+                        }
+                    }
+                }
+            }
+            
+            // Course title
+            .ufpel-course-title {
+                font-size: 2.5rem;
+                font-weight: 700;
+                margin-bottom: var(--ufpel-spacing-sm);
+                color: white;
+                line-height: 1.2;
+                
+                @media (max-width: 768px) {
+                    font-size: 2rem;
+                }
+                
+                @media (max-width: 576px) {
+                    font-size: 1.5rem;
+                }
+            }
+            
+            // Teachers list
+            .ufpel-course-teachers {
+                margin-bottom: var(--ufpel-spacing-sm);
+                font-size: 1.1rem;
+                color: rgba(255, 255, 255, 0.95);
+                
+                .teacher-label {
+                    font-weight: 500;
+                    margin-right: 0.5rem;
+                }
+                
+                .teacher-name {
+                    margin-right: 0.25rem;
+                }
+            }
+            
+            // Course summary
+            .ufpel-course-summary {
+                margin-bottom: var(--ufpel-spacing-md);
+                font-size: 1rem;
+                line-height: 1.5;
+                color: rgba(255, 255, 255, 0.9);
+                max-width: 800px;
+            }
+            
+            // Course metadata
+            .ufpel-course-meta {
+                display: flex;
+                flex-wrap: wrap;
+                gap: var(--ufpel-spacing-md);
+                margin-top: var(--ufpel-spacing-sm);
+                font-size: 0.95rem;
+                color: rgba(255, 255, 255, 0.9);
+                
+                .meta-item {
+                    display: flex;
+                    align-items: center;
+                    
+                    i {
+                        margin-right: 0.4rem;
+                        opacity: 0.8;
+                    }
+                }
+                
+                @media (max-width: 576px) {
+                    flex-direction: column;
+                    gap: var(--ufpel-spacing-xs);
+                }
+            }
+            
+            // Progress bar
+            .ufpel-course-progress {
+                margin-top: var(--ufpel-spacing-md);
+                
+                .progress-label {
+                    margin-bottom: var(--ufpel-spacing-xs);
+                    font-size: 0.9rem;
+                    color: rgba(255, 255, 255, 0.9);
+                }
+                
+                .progress {
+                    height: 8px;
+                    background-color: rgba(255, 255, 255, 0.2);
+                    border-radius: 4px;
+                    overflow: hidden;
+                    
+                    .progress-bar {
+                        background-color: var(--ufpel-highlight);
+                        transition: width 1.5s ease-out;
+                        
+                        &.completed {
+                            background: linear-gradient(90deg, #28a745, #20c997);
+                        }
+                    }
+                }
+            }
+            
+            // Custom fields
+            .ufpel-course-customfields {
+                margin-top: var(--ufpel-spacing-sm);
+                
+                .customfield-item {
+                    margin-bottom: var(--ufpel-spacing-xs);
+                    font-size: 0.95rem;
+                    color: rgba(255, 255, 255, 0.9);
+                    
+                    .customfield-name {
+                        font-weight: 500;
+                        margin-right: 0.5rem;
+                    }
+                }
+            }
+        }
+        
+        // Parallax effect
+        &.parallax-enabled {
+            will-change: transform;
+            transform: translateZ(0); // Enable GPU acceleration
+        }
+        
+        // Collapsed state
+        &.collapsed {
+            min-height: 100px;
+            
+            .ufpel-course-header-content {
+                padding: var(--ufpel-spacing-md);
+                
+                .ufpel-course-summary,
+                .ufpel-course-meta,
+                .ufpel-course-progress,
+                .ufpel-course-customfields {
+                    display: none;
+                }
+                
+                .ufpel-course-title {
+                    font-size: 1.5rem;
+                    margin-bottom: 0;
+                }
+            }
+        }
+        
+        // Header toggle button
+        .header-toggle {
+            position: absolute;
+            top: var(--ufpel-spacing-md);
+            right: var(--ufpel-spacing-md);
+            z-index: 3;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--ufpel-radius-sm);
+            transition: all var(--ufpel-transition-speed) var(--ufpel-transition-timing);
+            
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.3);
+                border-color: rgba(255, 255, 255, 0.4);
+            }
+        }
+        
+        // Loading state
+        &.loading {
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 10;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        
+        // Course completed state
+        &.course-completed {
+            .ufpel-course-header-overlay {
+                background: linear-gradient(
+                    to bottom,
+                    rgba(40, 167, 69, 0.2) 0%,
+                    rgba(40, 167, 69, 0.4) 100%
+                );
+            }
+        }
+    }
+    
+    // Completion message
+    .completion-message {
+        position: absolute;
+        bottom: var(--ufpel-spacing-lg);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 5;
+        max-width: 90%;
+        text-align: center;
+        
+        h4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 0;
+        }
+    }
+}
+
+// Dark mode support
+.ufpel-dark-mode {
+    .ufpel-course-header-wrapper {
+        .ufpel-course-header {
+            .ufpel-course-header-content {
+                .ufpel-course-breadcrumb .breadcrumb {
+                    .breadcrumb-item {
+                        color: rgba(255, 255, 255, 0.85);
+                        
+                        a {
+                            color: rgba(255, 255, 255, 0.95);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+    .ufpel-course-header-wrapper {
+        .ufpel-course-header {
+            .ufpel-course-header-content {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+        }
+    }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+    .ufpel-course-header-wrapper {
+        .ufpel-course-header {
+            &.parallax-enabled {
+                transform: none !important;
+            }
+            
+            .progress-bar {
+                transition: none !important;
+            }
+        }
+    }
+}

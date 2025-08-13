@@ -1,0 +1,149 @@
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * UFPel theme default preset.
+ *
+ * @package    theme_ufpel
+ * @copyright  2025 Universidade Federal de Pelotas
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+// ============================================================================
+// UFPel Theme Variables - Define before importing Bootstrap
+// ============================================================================
+
+// Brand Colors - Can be overridden by theme settings
+$ufpel-primary: #003366 !default;      // UFPel institutional blue
+$ufpel-secondary: #0066cc !default;    // Lighter blue for accents
+$ufpel-success: #28a745 !default;     // Green for success states
+$ufpel-info: #17a2b8 !default;        // Cyan for informational
+$ufpel-warning: #ffc107 !default;     // Yellow for warnings
+$ufpel-danger: #dc3545 !default;      // Red for errors/danger
+$ufpel-light: #f8f9fa !default;       // Light gray backgrounds
+$ufpel-dark: #343a40 !default;        // Dark gray for text
+
+// Override Bootstrap theme colors
+$primary: $ufpel-primary !default;
+$secondary: $ufpel-secondary !default;
+$success: $ufpel-success !default;
+$info: $ufpel-info !default;
+$warning: $ufpel-warning !default;
+$danger: $ufpel-danger !default;
+$light: $ufpel-light !default;
+$dark: $ufpel-dark !default;
+
+// Typography
+$font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+
+$font-size-base: 1rem !default;
+$font-weight-base: 400 !default;
+$line-height-base: 1.5 !default;
+
+$headings-font-family: null !default;
+$headings-font-weight: 600 !default;
+$headings-line-height: 1.2 !default;
+$headings-color: null !default;
+
+// Spacing
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3
+) !default;
+
+// Body
+$body-bg: #fff !default;
+$body-color: #212529 !default;
+
+// Links
+$link-color: $primary !default;
+$link-decoration: none !default;
+$link-hover-color: darken($link-color, 15%) !default;
+$link-hover-decoration: underline !default;
+
+// Grid
+$grid-gutter-width: 30px !default;
+
+// Components
+$border-width: 1px !default;
+$border-color: #dee2e6 !default;
+
+$border-radius: 0.25rem !default;
+$border-radius-sm: 0.2rem !default;
+$border-radius-lg: 0.3rem !default;
+
+// Shadows
+$box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !default;
+$box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !default;
+$box-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175) !default;
+
+// Buttons
+$btn-font-weight: 500 !default;
+$btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075) !default;
+$btn-focus-box-shadow: 0 0 0 0.2rem rgba($primary, .25) !default;
+$btn-active-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !default;
+
+// Forms
+$input-border-color: #ced4da !default;
+$input-focus-border-color: lighten($primary, 25%) !default;
+$input-focus-box-shadow: 0 0 0 0.2rem rgba($primary, .25) !default;
+
+// Cards
+$card-spacer-y: 0.75rem !default;
+$card-spacer-x: 1.25rem !default;
+$card-border-width: $border-width !default;
+$card-border-radius: $border-radius !default;
+$card-border-color: rgba(0, 0, 0, 0.125) !default;
+$card-cap-bg: rgba(0, 0, 0, 0.03) !default;
+$card-bg: #fff !default;
+
+// Navbar
+$navbar-padding-y: 0.5rem !default;
+$navbar-brand-font-size: 1.25rem !default;
+$navbar-dark-color: rgba(255, 255, 255, 0.9) !default;
+$navbar-dark-hover-color: rgba(255, 255, 255, 1) !default;
+$navbar-dark-active-color: #fff !default;
+
+// Dropdowns
+$dropdown-border-radius: $border-radius !default;
+$dropdown-box-shadow: $box-shadow !default;
+
+// Z-index
+$zindex-dropdown: 1000 !default;
+$zindex-sticky: 1020 !default;
+$zindex-fixed: 1030 !default;
+$zindex-modal-backdrop: 1040 !default;
+$zindex-modal: 1050 !default;
+$zindex-popover: 1060 !default;
+$zindex-tooltip: 1070 !default;
+
+// ============================================================================
+// Import Bootstrap and Boost Components
+// ============================================================================
+
+// Import FontAwesome (must be before Bootstrap)
+@import "../../boost/scss/fontawesome";
+
+// Import Bootstrap
+@import "../../boost/scss/bootstrap";
+
+// Import core Moodle styles
+@import "../../boost/scss/moodle";
