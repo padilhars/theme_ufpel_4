@@ -42,12 +42,31 @@ function theme_ufpel_get_main_scss_content($theme) {
     $fs = get_file_storage();
     $context = context_system::instance();
     
-    // Try to load preset file from theme settings
-    if ($filename && ($presetfile = $fs->get_file($context->id, 'theme_ufpel', 'preset', 0, '/', $filename))) {
+    // CORREÇÃO PRINCIPAL: Primeiro tenta carregar preset customizado do file storage
+    $presetfile = $fs->get_file($context->id, 'theme_ufpel', 'preset', 0, '/', $filename);
+    
+    if ($presetfile) {
+        // Preset customizado enviado pelo usuário
         $scss .= $presetfile->get_content();
     } else {
-        // Load default preset
-        $scss .= theme_ufpel_get_default_preset_content($CFG->dirroot);
+        // CORREÇÃO: Carrega preset do diretório do tema
+        $presetpath = $CFG->dirroot . '/theme/ufpel/scss/preset/' . $filename;
+        
+        if (file_exists($presetpath) && is_readable($presetpath)) {
+            $scss .= file_get_contents($presetpath);
+        } else {
+            // Fallback para o preset default
+            $defaultpath = $CFG->dirroot . '/theme/ufpel/scss/preset/default.scss';
+            if (file_exists($defaultpath) && is_readable($defaultpath)) {
+                $scss .= file_get_contents($defaultpath);
+            } else {
+                // Último fallback para o Boost
+                $boostdefault = $CFG->dirroot . '/theme/boost/scss/preset/default.scss';
+                if (file_exists($boostdefault) && is_readable($boostdefault)) {
+                    $scss .= file_get_contents($boostdefault);
+                }
+            }
+        }
     }
     
     // Append post.scss content
@@ -235,25 +254,56 @@ function theme_ufpel_css_tree_post_processor($css, $theme) {
  * @param array $args The arguments.
  * @param bool $forcedownload Whether to force download.
  * @param array $options Additional options.
- * @return bool|void
+ * @return bool
  */
 function theme_ufpel_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
-    // Check context level
+    global $CFG;
+    
+    // Check the context is correct
     if ($context->contextlevel != CONTEXT_SYSTEM) {
         return false;
     }
     
-    // Validate file areas
-    $allowedareas = ['logo', 'loginbackgroundimage', 'preset', 'favicon', 'footerlogo'];
-    if (!in_array($filearea, $allowedareas)) {
+    // Valid file areas for this theme
+    $validareas = [
+        'logo',
+        'footerlogo', 
+        'loginbackgroundimage',
+        'favicon',
+        'preset',
+        'presetfiles'
+    ];
+    
+    if (!in_array($filearea, $validareas)) {
         return false;
     }
     
-    // Use theme_config to serve the file
-    $theme = theme_config::load('ufpel');
+    // Use a cache with appropriate TTL
+    $lifetime = isset($CFG->filelifetime) ? $CFG->filelifetime : 86400;
     
-    // The setting_file_serve method handles the file serving correctly
-    return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
+    // Special handling for preset files
+    if ($filearea === 'preset' || $filearea === 'presetfiles') {
+        $lifetime = DAYSECS;  // Cache presets for 1 day
+    }
+    
+    $fs = get_file_storage();
+    
+    $filename = array_pop($args);
+    $filepath = '/';
+    
+    // Handle itemid
+    $itemid = 0;
+    if (!empty($args)) {
+        $itemid = array_pop($args);
+    }
+    
+    if (!$file = $fs->get_file($context->id, 'theme_ufpel', $filearea, $itemid, $filepath, $filename)) {
+        return false;
+    }
+    
+    // Send headers and file
+    send_stored_file($file, $lifetime, 0, $forcedownload, $options);
+    return true;
 }
 
 /**

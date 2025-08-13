@@ -211,9 +211,9 @@ $THEME->enablecourseajax = true;
 // Dock is not used in modern themes
 $THEME->enable_dock = false;
 
-// Preset files
 $THEME->presetsfiles = [
     'default.scss',
+    'dark.scss',
     'plain.scss',
 ];
 

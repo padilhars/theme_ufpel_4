@@ -22,10 +22,10 @@
  */
 
 // ============================================================================
-// Dark Mode Color Scheme
+// Dark Mode Color Scheme - Override Bootstrap variables BEFORE import
 // ============================================================================
 
-// Dark mode base colors
+// Dark mode base colors - Redefine grays for dark theme
 $gray-100: #1a1a1a !default;
 $gray-200: #2d2d2d !default;
 $gray-300: #404040 !default;
@@ -56,44 +56,85 @@ $danger: $ufpel-danger !default;
 $light: $ufpel-light !default;
 $dark: $ufpel-dark !default;
 
-// Body
+// Body and text
 $body-bg: $gray-100 !default;
 $body-color: $gray-900 !default;
 
 // Typography
-$font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-size-base: 0.9375rem !default;
 $headings-color: #ffffff !default;
 $text-muted: $gray-600 !default;
 
 // Links
 $link-color: $ufpel-secondary !default;
-$link-hover-color: lighten($link-color, 10%) !default;
-
-// Components
-$component-active-bg: $primary !default;
-$component-active-color: #ffffff !default;
+$link-hover-color: lighten($link-color, 15%) !default;
 
 // Borders
 $border-color: $gray-300 !default;
+$border-width: 1px !default;
+$border-radius: 0.25rem !default;
 
-// Cards
+// Components
+$component-active-color: #ffffff !default;
+$component-active-bg: $primary !default;
+
+// Cards - Dark theme specific
 $card-bg: $gray-200 !default;
 $card-border-color: $gray-300 !default;
-$card-cap-bg: rgba(255, 255, 255, 0.03) !default;
+$card-cap-bg: $gray-300 !default;
+$card-cap-color: $gray-900 !default;
 
-// Dropdowns
+// Forms - Dark theme specific
+$input-bg: $gray-200 !default;
+$input-disabled-bg: $gray-100 !default;
+$input-border-color: $gray-400 !default;
+$input-color: $gray-900 !default;
+$input-focus-bg: $gray-200 !default;
+$input-focus-border-color: $primary !default;
+$input-focus-color: $gray-900 !default;
+$input-placeholder-color: $gray-600 !default;
+
+// Custom select
+$custom-select-bg: $gray-200 !default;
+$custom-select-color: $gray-900 !default;
+$custom-select-border-color: $gray-400 !default;
+$custom-select-indicator-color: $gray-600 !default;
+
+// Buttons
+$btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 1px 1px rgba(0, 0, 0, 0.2) !default;
+
+// Dropdowns - Dark theme specific
 $dropdown-bg: $gray-200 !default;
 $dropdown-border-color: $gray-300 !default;
 $dropdown-divider-bg: $gray-300 !default;
 $dropdown-link-color: $gray-900 !default;
 $dropdown-link-hover-color: #ffffff !default;
 $dropdown-link-hover-bg: $gray-300 !default;
+$dropdown-link-active-color: #ffffff !default;
+$dropdown-link-active-bg: $primary !default;
+$dropdown-link-disabled-color: $gray-600 !default;
 
-// Navbar
+// Navs
+$nav-link-disabled-color: $gray-600 !default;
+$nav-tabs-border-color: $gray-300 !default;
+$nav-tabs-link-hover-border-color: $gray-300 !default;
+$nav-tabs-link-active-color: $gray-900 !default;
+$nav-tabs-link-active-bg: $body-bg !default;
+$nav-tabs-link-active-border-color: $gray-300 !default;
+
+// Navbar - Dark theme specific
 $navbar-dark-color: rgba(255, 255, 255, 0.8) !default;
 $navbar-dark-hover-color: rgba(255, 255, 255, 1) !default;
 $navbar-dark-active-color: #ffffff !default;
-$navbar-dark-bg: $gray-200 !default;
+$navbar-dark-disabled-color: rgba(255, 255, 255, 0.3) !default;
+$navbar-dark-toggler-border-color: rgba(255, 255, 255, 0.1) !default;
+
+$navbar-light-color: $gray-900 !default;
+$navbar-light-hover-color: $primary !default;
+$navbar-light-active-color: $primary !default;
+$navbar-light-disabled-color: $gray-600 !default;
+$navbar-light-toggler-border-color: $gray-300 !default;
 
 // Pagination
 $pagination-bg: $gray-200 !default;
@@ -101,27 +142,10 @@ $pagination-border-color: $gray-300 !default;
 $pagination-hover-bg: $gray-300 !default;
 $pagination-hover-border-color: $gray-400 !default;
 $pagination-disabled-bg: $gray-200 !default;
+$pagination-disabled-border-color: $gray-300 !default;
 
-// Forms
-$input-bg: $gray-200 !default;
-$input-border-color: $gray-300 !default;
-$input-color: $gray-900 !default;
-$input-focus-bg: $gray-200 !default;
-$input-focus-border-color: $primary !default;
-$input-focus-color: $gray-900 !default;
-$input-placeholder-color: $gray-600 !default;
-$input-disabled-bg: $gray-100 !default;
-
-$custom-select-bg: $gray-200 !default;
-$custom-select-color: $gray-900 !default;
-$custom-select-border-color: $gray-300 !default;
-$custom-select-indicator-color: $gray-600 !default;
-
-$custom-control-indicator-bg: $gray-200 !default;
-$custom-control-indicator-border-color: $gray-400 !default;
-
-// Buttons
-$btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 1px 1px rgba(0, 0, 0, 0.2) !default;
+// Jumbotron
+$jumbotron-bg: $gray-200 !default;
 
 // Tables
 $table-bg: transparent !default;
@@ -130,6 +154,7 @@ $table-hover-bg: rgba(255, 255, 255, 0.075) !default;
 $table-border-color: $gray-300 !default;
 $table-dark-bg: $gray-200 !default;
 $table-dark-border-color: $gray-300 !default;
+$table-striped-bg: rgba(255, 255, 255, 0.05) !default;
 
 // List groups
 $list-group-bg: $gray-200 !default;
@@ -161,66 +186,272 @@ $badge-color: #ffffff !default;
 
 // Breadcrumbs
 $breadcrumb-bg: $gray-200 !default;
+$breadcrumb-divider-color: $gray-600 !default;
+$breadcrumb-active-color: $gray-600 !default;
 
 // Close
 $close-color: $gray-900 !default;
+$close-text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5) !default;
 
 // Code
-$code-color: #f06292 !default;
+$code-color: #e83e8c !default;
 $pre-color: $gray-900 !default;
 
 // HR
-$hr-border-color: $gray-300 !default;
+$hr-border-color: $gray-400 !default;
 
 // ============================================================================
-// Import Bootstrap and Boost Components
+// Import Bootstrap and Boost Components - MUST come AFTER variable overrides
 // ============================================================================
 
-// Import FontAwesome
+// Import FontAwesome (must be before Bootstrap)
 @import "../../boost/scss/fontawesome";
 
-// Import Bootstrap with dark theme colors
+// Import Bootstrap - This will use our overridden variables
 @import "../../boost/scss/bootstrap";
 
 // Import core Moodle styles
 @import "../../boost/scss/moodle";
 
 // ============================================================================
-// Dark Mode Specific Overrides
+// Additional Dark Mode Customizations - Applied AFTER Bootstrap
 // ============================================================================
 
-// Additional dark mode specific styles
-.theme-dark {
-    // Syntax highlighting for code blocks
-    .hljs {
-        background: $gray-200;
+// Ensure dark background is applied
+html, body {
+    background-color: $body-bg !important;
+    color: $body-color !important;
+}
+
+// Navigation adjustments for dark mode
+.navbar {
+    background-color: darken($primary, 10%) !important;
+    border-bottom: 1px solid $gray-300;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    
+    &:hover, &:focus {
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+}
+
+// Drawer/sidebar adjustments
+.drawer {
+    background-color: $gray-200 !important;
+    border-right: 1px solid $gray-300;
+}
+
+.drawer-left {
+    background-color: $gray-200 !important;
+    
+    .list-group-item {
+        background-color: transparent;
+        border-color: $gray-300;
+        color: $gray-900;
+        
+        &:hover {
+            background-color: $gray-300;
+        }
+        
+        &.active {
+            background-color: $primary;
+            border-color: $primary;
+            color: #ffffff;
+        }
+    }
+}
+
+// Block adjustments
+.block {
+    background-color: $gray-200 !important;
+    border: 1px solid $gray-300;
+    
+    .block-header {
+        background-color: $gray-300;
         color: $gray-900;
     }
     
-    // Activity icons inversion
-    .activityicon {
-        filter: invert(0.8);
+    .block-content {
+        background-color: $gray-200;
     }
+}
+
+// Course content area
+#region-main {
+    background-color: transparent;
     
-    // Image dimming
-    img:not(.no-dim) {
-        opacity: 0.9;
+    .card {
+        background-color: $gray-200 !important;
+        border-color: $gray-300 !important;
         
-        &:hover {
-            opacity: 1;
+        .card-header {
+            background-color: $gray-300 !important;
+            border-bottom-color: $gray-400 !important;
         }
     }
+}
+
+// Activity modules
+.activity-item {
+    &:hover {
+        background-color: $gray-300;
+    }
+}
+
+// Footer
+#page-footer {
+    background-color: $gray-200 !important;
+    border-top: 1px solid $gray-300;
+    color: $gray-900;
+}
+
+// Buttons - ensure proper contrast
+.btn-primary {
+    background-color: $primary;
+    border-color: $primary;
     
-    // Shadow adjustments
-    .shadow-sm {
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3) !important;
+    &:hover {
+        background-color: lighten($primary, 10%);
+        border-color: lighten($primary, 10%);
+    }
+}
+
+.btn-secondary {
+    background-color: $gray-400;
+    border-color: $gray-400;
+    color: #ffffff;
+    
+    &:hover {
+        background-color: $gray-500;
+        border-color: $gray-500;
+    }
+}
+
+// Form controls additional styling
+.form-control:focus {
+    background-color: $input-focus-bg;
+    border-color: $input-focus-border-color;
+    color: $input-focus-color;
+    box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+}
+
+// Select dropdowns
+select.form-control {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill='%23999' d='M0 2l4 4 4-4z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 8px 10px;
+}
+
+// Alerts
+.alert {
+    border: 1px solid;
+    
+    &.alert-info {
+        background-color: darken($info, 40%);
+        border-color: darken($info, 30%);
+        color: lighten($info, 20%);
     }
     
-    .shadow {
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4) !important;
+    &.alert-warning {
+        background-color: darken($warning, 40%);
+        border-color: darken($warning, 30%);
+        color: lighten($warning, 20%);
     }
     
-    .shadow-lg {
-        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5) !important;
+    &.alert-danger {
+        background-color: darken($danger, 40%);
+        border-color: darken($danger, 30%);
+        color: lighten($danger, 20%);
+    }
+    
+    &.alert-success {
+        background-color: darken($success, 40%);
+        border-color: darken($success, 30%);
+        color: lighten($success, 20%);
+    }
+}
+
+// Tooltips
+.tooltip {
+    .tooltip-inner {
+        background-color: $gray-700;
+        color: $gray-100;
+    }
+    
+    &.bs-tooltip-top .arrow::before {
+        border-top-color: $gray-700;
+    }
+    
+    &.bs-tooltip-right .arrow::before {
+        border-right-color: $gray-700;
+    }
+    
+    &.bs-tooltip-bottom .arrow::before {
+        border-bottom-color: $gray-700;
+    }
+    
+    &.bs-tooltip-left .arrow::before {
+        border-left-color: $gray-700;
+    }
+}
+
+// Popovers
+.popover {
+    background-color: $gray-200;
+    border-color: $gray-300;
+    
+    .popover-header {
+        background-color: $gray-300;
+        border-bottom-color: $gray-400;
+        color: $gray-900;
+    }
+    
+    .popover-body {
+        color: $gray-900;
+    }
+}
+
+// Calendar
+.calendar_event {
+    background-color: $gray-300 !important;
+    
+    &.calendar_event_course {
+        background-color: darken($primary, 20%) !important;
+    }
+    
+    &.calendar_event_user {
+        background-color: darken($info, 20%) !important;
+    }
+}
+
+// Messages
+.message {
+    &.message-app {
+        background-color: $gray-100;
+        
+        .message-drawer {
+            background-color: $gray-200;
+        }
+        
+        .message-app-drawer {
+            background-color: $gray-200;
+            border-right: 1px solid $gray-300;
+        }
+    }
+}
+
+// Search boxes
+.search-input-wrapper {
+    input {
+        background-color: $gray-200 !important;
+        border-color: $gray-400 !important;
+        color: $gray-900 !important;
+        
+        &::placeholder {
+            color: $gray-600;
+        }
     }
 }
