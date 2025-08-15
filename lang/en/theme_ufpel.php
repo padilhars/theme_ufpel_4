@@ -83,6 +83,19 @@ $string['loginbackgroundimage_desc'] = 'An image that will be displayed as the b
 $string['favicon'] = 'Favicon';
 $string['favicon_desc'] = 'Upload a custom favicon. Should be an .ico, .png or .svg file.';
 
+// Logo settings
+$string['logowidth'] = 'Logo width';
+$string['logowidth_desc'] = 'Set a custom width for the logo in pixels. Leave empty for automatic sizing.';
+$string['showsitenamewithlogo'] = 'Show site name with logo';
+$string['showsitenamewithlogo_desc'] = 'Display the site name alongside the logo in the navigation bar.';
+$string['compactlogo'] = 'Compact logo';
+$string['compactlogo_desc'] = 'A smaller version of the logo for mobile devices. If not set, the main logo will be used.';
+$string['logodisplaymode'] = 'Logo display mode';
+$string['logodisplaymode_desc'] = 'Choose how the logo should be displayed in different screen sizes.';
+$string['logodisplaymode_responsive'] = 'Responsive (adapts to screen size)';
+$string['logodisplaymode_fixed'] = 'Fixed size';
+$string['logodisplaymode_compact'] = 'Always compact';
+
 // Custom CSS/SCSS
 $string['customcss'] = 'Custom CSS';
 $string['customcss_desc'] = 'Whatever CSS rules you add to this textarea will be reflected in every page, making it easier to customize this theme.';

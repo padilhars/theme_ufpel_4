@@ -17,30 +17,56 @@
 {{!
     @template theme_ufpel/navbar_brand
 
-    Navbar brand template for UFPel theme.
+    Enhanced navbar brand template for UFPel theme with logo support.
 
     Context variables required for this template:
     * logourl - URL of the logo image (optional)
-    * sitename - Site name
+    * compactlogourl - URL of the compact logo for mobile (optional)
+    * sitename - Site or course name
     * homeurl - Home page URL
+    * showtext - Whether to show text alongside logo (optional)
+    * haslogo - Boolean indicating if logo is present
+    * hascompactlogo - Boolean indicating if compact logo is present
+    * logowidth - Custom logo width in pixels (optional)
+    * logodisplaymode - Display mode setting (optional)
 
     Example context (json):
     {
         "logourl": "https://example.com/logo.png",
+        "compactlogourl": "https://example.com/logo-compact.png",
         "sitename": "UFPel Moodle",
-        "homeurl": "/"
+        "homeurl": "/",
+        "showtext": false,
+        "haslogo": true,
+        "hascompactlogo": true,
+        "logowidth": 180,
+        "logodisplaymode": "responsive"
     }
 }}
-<a class="navbar-brand {{#logourl}}has-logo{{/logourl}}" href="{{homeurl}}" aria-label="{{sitename}}">
-    {{#logourl}}
-    <img src="{{logourl}}" 
-         alt="{{sitename}}" 
-         class="logo"
-         loading="eager"
-         width="auto"
-         height="40">
-    {{/logourl}}
-    {{^logourl}}
+<a class="navbar-brand d-flex align-items-center {{#haslogo}}has-logo{{/haslogo}} {{^haslogo}}text-only{{/haslogo}}" 
+   href="{{homeurl}}" 
+   aria-label="{{#str}}home{{/str}} - {{sitename}}">
+    {{#haslogo}}
+    <picture class="navbar-logo">
+        {{#hascompactlogo}}
+        <source media="(max-width: 575px)" srcset="{{compactlogourl}}">
+        {{/hascompactlogo}}
+        <img src="{{logourl}}" 
+             alt="{{sitename}}" 
+             class="logo"
+             loading="eager"
+             {{#logowidth}}width="{{logowidth}}"{{/logowidth}}
+             {{^logowidth}}width="auto"{{/logowidth}}
+             height="40"
+             role="img">
+    </picture>
+    {{/haslogo}}
+    
+    {{#showtext}}
+    <span class="site-name {{#haslogo}}ml-2{{/haslogo}}">{{sitename}}</span>
+    {{/showtext}}
+    
+    {{^haslogo}}
     <span class="site-name">{{sitename}}</span>
-    {{/logourl}}
+    {{/haslogo}}
 </a>

@@ -128,22 +128,154 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
     
     /**
-     * Override navbar brand to use logo if available.
+     * Override navbar brand to use logo if available from theme settings.
+     * Enhanced version with better fallback handling and caching.
      *
      * @return string HTML for navbar brand
      */
     public function navbar_brand() {
-        $logourl = $this->get_logo_url(null, 40);
+        global $SITE, $CFG;
         
-        // Since get_logo_url returns a moodle_url object or null, handle appropriately
+        // Detect if we should use compact logo for mobile
+        $usecompact = false;
+        $logodisplaymode = get_config('theme_ufpel', 'logodisplaymode');
+        
+        // Check if we should use compact logo
+        if ($logodisplaymode === 'compact') {
+            $usecompact = true;
+        }
+        
+        // Get appropriate logo URL
+        if ($usecompact) {
+            $logourl = $this->get_compact_logo_url(null, 40);
+        } else {
+            $logourl = $this->get_logo_url(null, 40);
+        }
+        
+        // Also get compact logo URL for responsive display
+        $compactlogourl = $this->get_compact_logo_url(null, 35);
+        
+        // Determine the site name to display
+        $sitename = '';
+        if ($this->page->pagelayout === 'frontpage' || $this->page->pagetype === 'site-index') {
+            // On frontpage, use full site name
+            $sitename = format_string($SITE->fullname, true, 
+                ['context' => \context_system::instance()]);
+        } else if (isset($this->page->course) && $this->page->course->id != SITEID) {
+            // On course pages, use course name
+            $sitename = format_string($this->page->course->fullname, true, 
+                ['context' => \context_course::instance($this->page->course->id)]);
+        } else {
+            // Default to site shortname
+            $sitename = format_string($SITE->shortname, true, 
+                ['context' => \context_system::instance()]);
+        }
+        
+        // Build home URL
+        $homeurl = new \moodle_url('/');
+        
+        // Check if we should show text alongside logo
+        $showtext = get_config('theme_ufpel', 'showsitenamewithlogo');
+        
+        // Prepare template context
         $templatecontext = [
             'logourl' => $logourl ? $logourl->out(false) : null,
-            'sitename' => format_string($this->page->course->shortname, true, 
-                ['context' => context_course::instance($this->page->course->id)]),
-            'homeurl' => (new moodle_url('/'))->out(false)
+            'compactlogourl' => $compactlogourl ? $compactlogourl->out(false) : null,
+            'sitename' => $sitename,
+            'homeurl' => $homeurl->out(false),
+            'showtext' => $showtext,
+            'haslogo' => !empty($logourl),
+            'hascompactlogo' => !empty($compactlogourl),
+            'logodisplaymode' => $logodisplaymode
         ];
         
+        // Add responsive logo dimensions if configured
+        $logowidth = get_config('theme_ufpel', 'logowidth');
+        if (!empty($logowidth) && is_numeric($logowidth)) {
+            $templatecontext['logowidth'] = $logowidth;
+        }
+        
         return $this->render_from_template('theme_ufpel/navbar_brand', $templatecontext);
+    }
+
+    /**
+     * Get compact logo URL for mobile view.
+     * 
+     * Note: Method signature must match parent class in core\output\renderer_base
+     * to avoid fatal errors about incompatible declarations.
+     * 
+     * @param int $maxwidth The maximum width, defaults to 300.
+     * @param int $maxheight The maximum height, defaults to 300.
+     * @return moodle_url|null The compact logo URL or null if not set.
+     */
+    public function get_compact_logo_url($maxwidth = 300, $maxheight = 300) {
+        // Check for a specific compact/mobile logo
+        $compactlogo = $this->page->theme->setting_file_url('compactlogo', 'compactlogo');
+        
+        if (!empty($compactlogo)) {
+            if ($compactlogo instanceof \moodle_url) {
+                return $compactlogo;
+            }
+            
+            $logostr = (string)$compactlogo;
+            if (!empty($logostr)) {
+                // Parse and create proper moodle_url
+                return $this->process_logo_url($logostr);
+            }
+        }
+        
+        // Fall back to main logo with specified dimensions
+        return $this->get_logo_url($maxwidth, $maxheight);
+    }
+
+    /**
+     * Helper method to process logo URL strings.
+     * 
+     * @param string $logostr The logo URL string.
+     * @return moodle_url|null Processed moodle_url or null.
+     */
+    protected function process_logo_url($logostr) {
+        global $CFG;
+        
+        if (empty($logostr)) {
+            return null;
+        }
+        
+        // Parse the URL
+        $parsed = parse_url($logostr);
+        
+        // If it's an absolute URL with scheme
+        if (!empty($parsed['scheme'])) {
+            try {
+                // Extract path and query
+                $path = $parsed['path'] ?? '';
+                if (!empty($parsed['query'])) {
+                    $path .= '?' . $parsed['query'];
+                }
+                if (!empty($parsed['fragment'])) {
+                    $path .= '#' . $parsed['fragment'];
+                }
+                
+                // Check if it's within our wwwroot
+                $wwwroot_parsed = parse_url($CFG->wwwroot);
+                $wwwroot_path = $wwwroot_parsed['path'] ?? '';
+                
+                if (!empty($wwwroot_path) && strpos($path, $wwwroot_path) === 0) {
+                    // Make it relative to wwwroot
+                    $relative_path = substr($path, strlen($wwwroot_path));
+                    return new \moodle_url($relative_path);
+                } else {
+                    // Use the path as is
+                    return new \moodle_url($path);
+                }
+            } catch (\Exception $e) {
+                debugging('Error processing logo URL: ' . $e->getMessage(), DEBUG_DEVELOPER);
+                return null;
+            }
+        } else {
+            // It's already a relative URL
+            return new \moodle_url($logostr);
+        }
     }
     
     /**

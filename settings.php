@@ -154,9 +154,58 @@ if ($ADMIN->fulltree) {
         0,
         ['maxfiles' => 1, 'accepted_types' => ['image']]
     );
+
+    // Logo width setting
+    $name = 'theme_ufpel/logowidth';
+    $title = get_string('logowidth', 'theme_ufpel');
+    $description = get_string('logowidth_desc', 'theme_ufpel');
+    $default = '';
+    $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_INT);
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
-    
+
+    // Show site name with logo setting
+    $name = 'theme_ufpel/showsitenamewithlogo';
+    $title = get_string('showsitenamewithlogo', 'theme_ufpel');
+    $description = get_string('showsitenamewithlogo_desc', 'theme_ufpel');
+    $default = 0;
+    $choices = [
+        0 => get_string('no'),
+        1 => get_string('yes')
+    ];
+    $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+
+    // Compact logo for mobile devices
+    $name = 'theme_ufpel/compactlogo';
+    $title = get_string('compactlogo', 'theme_ufpel');
+    $description = get_string('compactlogo_desc', 'theme_ufpel');
+    $setting = new admin_setting_configstoredfile(
+        $name,
+        $title,
+        $description,
+        'compactlogo',
+        0,
+        ['maxfiles' => 1, 'accepted_types' => ['image']]
+    );
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+
+    // Logo display mode
+    $name = 'theme_ufpel/logodisplaymode';
+    $title = get_string('logodisplaymode', 'theme_ufpel');
+    $description = get_string('logodisplaymode_desc', 'theme_ufpel');
+    $default = 'responsive';
+    $choices = [
+        'responsive' => get_string('logodisplaymode_responsive', 'theme_ufpel'),
+        'fixed' => get_string('logodisplaymode_fixed', 'theme_ufpel'),
+        'compact' => get_string('logodisplaymode_compact', 'theme_ufpel')
+    ];
+    $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+        
     // Login background image.
     $name = 'theme_ufpel/loginbackgroundimage';
     $title = get_string('loginbackgroundimage', 'theme_ufpel');

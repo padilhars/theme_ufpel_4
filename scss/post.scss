@@ -36,6 +36,7 @@
 @import "components/login";
 @import "components/course_header";
 @import "components/course_page";
+@import "components/navbar-brand";
 
 // ============================================================================
 // CSS Custom Properties (CSS Variables)
@@ -129,51 +130,71 @@ a {
 // Layout Components
 // ============================================================================
 
-// Navbar - Bootstrap 5 compatible
+// Ensure navbar accommodates logo properly
 .navbar {
-    background-color: var(--ufpel-primary) !important;
-    box-shadow: var(--ufpel-shadow-sm);
-    transition: transform var(--ufpel-transition-speed) var(--ufpel-transition-timing);
+    min-height: 60px;
+    padding: 0;
     
-    &.navbar-hidden {
-        transform: translateY(-100%);
-    }
-    
-    .navbar-brand {
-        color: var(--ufpel-text-highlight);
-        font-weight: 700;
-        font-size: 1.5rem;
-        
-        &:hover,
-        &:focus {
-            color: var(--ufpel-text-highlight);
-            opacity: 0.9;
-        }
-        
-        .logo {
-            max-height: 40px;
-            width: auto;
-        }
-    }
-    
+    // Ensure proper alignment of navbar items
     .navbar-nav {
-        .nav-link {
-            color: var(--ufpel-text-highlight);
-            transition: opacity var(--ufpel-transition-speed) var(--ufpel-transition-timing);
-            
-            &:hover,
-            &:focus {
-                color: var(--ufpel-highlight);
-                opacity: 0.8;
-            }
-            
-            &.active {
-                font-weight: 600;
-                opacity: 1;
-            }
+        align-items: center;
+    }
+    
+    // Adjust spacing when logo is present
+    &:has(.navbar-brand.has-logo) {
+        padding-left: 0;
+        
+        // Adjust other navbar elements spacing
+        .navbar-nav {
+            margin-left: 1rem;
         }
     }
 }
+
+// Fix Bootstrap 5 compatibility issues
+.navbar-expand {
+    .navbar-brand {
+        margin-right: 1rem;
+    }
+}
+
+// Ensure logo visibility on different backgrounds
+.navbar-dark,
+.navbar.bg-primary,
+.navbar.bg-dark {
+    .navbar-brand {
+        .logo,
+        picture img {
+            // Add subtle white background for logos that might not be visible on dark backgrounds
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+        }
+    }
+}
+
+// Loading state for logo
+.navbar-brand {
+    .logo,
+    picture img {
+        &[src=""],
+        &:not([src]) {
+            // Hide broken image icon while loading
+            visibility: hidden;
+        }
+        
+        // Smooth appearance when loaded
+        animation: fadeIn 0.3s ease-in;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 
 // ============================================================================
 // Cards - Bootstrap 5 Updates
@@ -255,12 +276,14 @@ a {
 
 .form-control,
 .form-select {
+    background-color: #ffffff;
     border-radius: var(--ufpel-radius-sm);
-    border-color: #ced4da;
+    border-color: var(--ufpel-primary);
     transition: border-color var(--ufpel-transition-speed) var(--ufpel-transition-timing),
                 box-shadow var(--ufpel-transition-speed) var(--ufpel-transition-timing);
     
     &:focus {
+        background-color: #ffffff;
         border-color: var(--ufpel-secondary);
         box-shadow: 0 0 0 0.25rem rgba(var(--ufpel-secondary-rgb), 0.25);
     }
@@ -387,6 +410,37 @@ a {
         text-decoration: none;
         border-radius: 0 0 var(--ufpel-radius-md) 0;
         box-shadow: var(--ufpel-shadow-md);
+    }
+}
+
+// Navbar - High contrast mode support
+@media (prefers-contrast: high) {
+    .navbar-brand {
+        .logo,
+        picture img {
+            filter: contrast(1.2);
+        }
+        
+        .site-name {
+            font-weight: 600;
+        }
+    }
+}
+
+// Navbar - educed motion support
+@media (prefers-reduced-motion: reduce) {
+    .navbar-brand {
+        transition: none;
+        
+        &:hover,
+        &:focus {
+            transform: none;
+        }
+        
+        .logo,
+        picture img {
+            animation: none;
+        }
     }
 }
 
