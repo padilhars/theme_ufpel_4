@@ -57,74 +57,40 @@ class core_renderer extends \theme_boost\output\core_renderer {
     }
     
     /**
-     * Get the logo URL.
-     * FIXED: Properly handles URL conversion to prevent duplication.
+     * Get the logo URL for the theme.
      *
-     * @param int|null $maxwidth The maximum width, or null when the maximum width does not matter.
+     * @param int $maxwidth The maximum width, or null when the maximum width does not matter.
      * @param int $maxheight The maximum height, or null when the maximum height does not matter.
-     * @return moodle_url|null The logo URL or null if not set.
+     * @return moodle_url|bool The logo URL or false
      */
     public function get_logo_url($maxwidth = null, $maxheight = 200) {
-        // Check if we have a custom logo from theme settings
-        $logo = $this->page->theme->setting_file_url('logo', 'logo');
+        // Check if logo setting exists and has a file
+        $logo_setting = get_config('theme_ufpel', 'logo');
         
-        if (!empty($logo)) {
-            // If it's already a moodle_url object, return it directly
-            if ($logo instanceof moodle_url) {
-                return $logo;
-            }
-            
-            // Convert to string for processing
-            $logostr = (string)$logo;
-            
-            // Check if it's empty after conversion
-            if (empty($logostr)) {
-                return parent::get_logo_url($maxwidth, $maxheight);
-            }
-            
-            // Parse the URL to check if it's absolute
-            $parsed = parse_url($logostr);
-            
-            // If the URL has a scheme (http/https), it's absolute
-            if (!empty($parsed['scheme'])) {
-                // It's an absolute URL, create moodle_url without modification
-                // Use parse_url components to avoid duplication
-                try {
-                    // Extract just the path and query from the absolute URL
-                    $path = $parsed['path'] ?? '';
-                    if (!empty($parsed['query'])) {
-                        $path .= '?' . $parsed['query'];
-                    }
-                    if (!empty($parsed['fragment'])) {
-                        $path .= '#' . $parsed['fragment'];
-                    }
-                    
-                    // If the path starts with the wwwroot path, use it as relative
-                    global $CFG;
-                    $wwwroot_parsed = parse_url($CFG->wwwroot);
-                    $wwwroot_path = $wwwroot_parsed['path'] ?? '';
-                    
-                    if (!empty($wwwroot_path) && strpos($path, $wwwroot_path) === 0) {
-                        // Remove the wwwroot path to make it relative
-                        $relative_path = substr($path, strlen($wwwroot_path));
-                        return new moodle_url($relative_path);
-                    } else {
-                        // Use the path as is
-                        return new moodle_url($path);
-                    }
-                } catch (\Exception $e) {
-                    // If there's any error, try returning the original URL
-                    // but wrapped in a moodle_url that won't duplicate
-                    return new moodle_url($logostr, [], '', '');
+        if (!empty($logo_setting)) {
+            $logo = $this->page->theme->setting_file_url('logo', 'logo');
+            if ($logo) {
+                // If it's already a moodle_url object, return it
+                if ($logo instanceof moodle_url) {
+                    return $logo;
                 }
-            } else {
-                // It's a relative URL, safe to use with moodle_url constructor
-                return new moodle_url($logostr);
+                // If it's a string (which is valid), convert to moodle_url
+                if (is_string($logo)) {
+                    // Handle protocol-relative URLs (starting with //) using current protocol
+                    if (strpos($logo, '//') === 0) {
+                        global $CFG;
+                        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https:' : 'http:';
+                        $logo = $protocol . $logo;
+                    }
+                    return new moodle_url($logo);
+                }
+                // If it's some other type, log and return false
+                debugging('Logo setting returned unexpected type: ' . gettype($logo) . ' - Value: ' . print_r($logo, true), DEBUG_DEVELOPER);
+                return false;
             }
         }
         
-        // Fall back to parent implementation if no custom logo
-        return parent::get_logo_url($maxwidth, $maxheight);
+        return false;
     }
     
     /**

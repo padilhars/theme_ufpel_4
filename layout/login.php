@@ -149,7 +149,7 @@ echo $OUTPUT->doctype();
 // Background image style
 if (!empty($templatecontext['hasloginbackgroundimage'])): ?>
 <style>
-    body.pagelayout-login {
+    body {
         background-image: url('<?php echo $templatecontext['loginbackgroundimage']; ?>');
         background-size: cover;
         background-position: center;

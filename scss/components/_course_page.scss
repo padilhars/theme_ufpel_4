@@ -1,3 +1,14 @@
+body {
+	&:not(.pagelayout-course) {
+		#region-main {
+			background-color: #ffffff;
+			padding: 1rem;
+    		border: 1px solid #dee2e6;
+    		border-radius: 1rem;
+		}
+	}
+}
+
 #page.drawers {
 
 	.main-inner {

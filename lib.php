@@ -257,53 +257,14 @@ function theme_ufpel_css_tree_post_processor($css, $theme) {
  * @return bool
  */
 function theme_ufpel_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
-    global $CFG;
-    
-    // Check the context is correct
-    if ($context->contextlevel != CONTEXT_SYSTEM) {
-        return false;
+    if ($context->contextlevel == CONTEXT_SYSTEM && 
+        ($filearea === 'loginbackgroundimage' || $filearea === 'logo' || $filearea === 'favicon')) {
+        
+        $theme = theme_config::load('ufpel');
+        return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
     }
     
-    // Valid file areas for this theme
-    $validareas = [
-        'logo',
-        'footerlogo', 
-        'loginbackgroundimage',
-        'favicon',
-        'preset',
-        'presetfiles'
-    ];
-    
-    if (!in_array($filearea, $validareas)) {
-        return false;
-    }
-    
-    // Use a cache with appropriate TTL
-    $lifetime = isset($CFG->filelifetime) ? $CFG->filelifetime : 86400;
-    
-    // Special handling for preset files
-    if ($filearea === 'preset' || $filearea === 'presetfiles') {
-        $lifetime = DAYSECS;  // Cache presets for 1 day
-    }
-    
-    $fs = get_file_storage();
-    
-    $filename = array_pop($args);
-    $filepath = '/';
-    
-    // Handle itemid
-    $itemid = 0;
-    if (!empty($args)) {
-        $itemid = array_pop($args);
-    }
-    
-    if (!$file = $fs->get_file($context->id, 'theme_ufpel', $filearea, $itemid, $filepath, $filename)) {
-        return false;
-    }
-    
-    // Send headers and file
-    send_stored_file($file, $lifetime, 0, $forcedownload, $options);
-    return true;
+    send_file_not_found();
 }
 
 /**

@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 // Plugin version (YYYYMMDDXX where XX is the daily increment).
-$plugin->version   = 2025120205; // Fixed URL duplication issues definitively
+$plugin->version   = 2025120207; // Fixed URL duplication issues definitively
 $plugin->requires  = 2024100700; // Moodle 5.0 or later
 
 // Plugin component name.
