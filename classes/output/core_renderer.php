@@ -176,7 +176,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      */
     public function get_compact_logo_url($maxwidth = 300, $maxheight = 300) {
         // Check for a specific compact/mobile logo
-        $compactlogo = $this->page->theme->setting_file_url('compactlogo', 'compactlogo');
+        $compactlogo = $this->page->theme->setting_file_url('logo', 'logo');
         
         if (!empty($compactlogo)) {
             if ($compactlogo instanceof \moodle_url) {
