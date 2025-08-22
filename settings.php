@@ -189,6 +189,26 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_reset_all_caches');
     $page->add($setting);
     
+    // Logo width setting.
+    $name = 'theme_ufpel/logowidth';
+    $title = get_string('logowidth', 'theme_ufpel');
+    $description = get_string('logowidth_desc', 'theme_ufpel');
+    $default = '';
+    
+    $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_INT);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+    
+    // Show site name with logo setting.
+    $name = 'theme_ufpel/showsitenamewithlogo';
+    $title = get_string('showsitenamewithlogo', 'theme_ufpel');
+    $description = get_string('showsitenamewithlogo_desc', 'theme_ufpel');
+    $default = 0;
+    
+    $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $page->add($setting);
+    
     // Custom fonts setting.
     $name = 'theme_ufpel/customfonts';
     $title = get_string('customfonts', 'theme_ufpel');

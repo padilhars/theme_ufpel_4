@@ -50,17 +50,9 @@
         border-radius: 4px;
     }
     
-    // Picture element container
-    .navbar-logo,
-    picture {
-        display: flex;
-        align-items: center;
-        height: 40px;
-    }
-    
     // Logo image styles
     .logo,
-    picture img {
+    img.logo {
         height: 40px;
         width: auto;
         max-width: 200px;
@@ -85,9 +77,8 @@
     // When logo is present
     &.has-logo {
         .site-name {
-            // Optional: Add specific styles when logo is present
+            // Optional: Hide text on very small screens if logo is present
             @media (max-width: 575.98px) {
-                // Hide text on very small screens if logo is present (unless showtext is enabled)
                 &:not(.force-show) {
                     display: none;
                 }
@@ -114,13 +105,8 @@
     .navbar-brand {
         padding: 0.25rem 0.5rem;
         
-        .navbar-logo,
-        picture {
-            height: 35px;
-        }
-        
         .logo,
-        picture img {
+        img.logo {
             height: 35px;
             max-width: 150px;
         }
@@ -134,13 +120,8 @@
 // Tablets
 @media (min-width: 576px) and (max-width: 767.98px) {
     .navbar-brand {
-        .navbar-logo,
-        picture {
-            height: 38px;
-        }
-        
         .logo,
-        picture img {
+        img.logo {
             height: 38px;
             max-width: 170px;
         }
@@ -154,13 +135,8 @@
 // Large screens
 @media (min-width: 1200px) {
     .navbar-brand {
-        .navbar-logo,
-        picture {
-            height: 45px;
-        }
-        
         .logo,
-        picture img {
+        img.logo {
             height: 45px;
             max-width: 250px;
         }
@@ -190,13 +166,8 @@ body.ufpel-compact-view {
     .navbar-brand {
         padding: 0.25rem 0.75rem;
         
-        .navbar-logo,
-        picture {
-            height: 30px;
-        }
-        
         .logo,
-        picture img {
+        img.logo {
             height: 30px;
         }
         
@@ -212,10 +183,8 @@ body.ufpel-compact-view {
 
 @media print {
     .navbar-brand {
-        .navbar-logo,
-        picture,
         .logo,
-        picture img {
+        img.logo {
             height: 30px;
             max-width: 150px;
         }

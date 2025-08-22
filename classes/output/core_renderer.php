@@ -95,31 +95,15 @@ class core_renderer extends \theme_boost\output\core_renderer {
     
     /**
      * Override navbar brand to use logo if available from theme settings.
-     * Enhanced version with better fallback handling and caching.
+     * Simplified version without compact logo support.
      *
      * @return string HTML for navbar brand
      */
     public function navbar_brand() {
         global $SITE, $CFG;
         
-        // Detect if we should use compact logo for mobile
-        $usecompact = false;
-        $logodisplaymode = get_config('theme_ufpel', 'logodisplaymode');
-        
-        // Check if we should use compact logo
-        if ($logodisplaymode === 'compact') {
-            $usecompact = true;
-        }
-        
-        // Get appropriate logo URL
-        if ($usecompact) {
-            $logourl = $this->get_compact_logo_url(null, 40);
-        } else {
-            $logourl = $this->get_logo_url(null, 40);
-        }
-        
-        // Also get compact logo URL for responsive display
-        $compactlogourl = $this->get_compact_logo_url(null, 35);
+        // Get logo URL
+        $logourl = $this->get_logo_url(null, 40);
         
         // Determine the site name to display
         $sitename = '';
@@ -146,13 +130,10 @@ class core_renderer extends \theme_boost\output\core_renderer {
         // Prepare template context
         $templatecontext = [
             'logourl' => $logourl ? $logourl->out(false) : null,
-            'compactlogourl' => $compactlogourl ? $compactlogourl->out(false) : null,
             'sitename' => $sitename,
             'homeurl' => $homeurl->out(false),
             'showtext' => $showtext,
-            'haslogo' => !empty($logourl),
-            'hascompactlogo' => !empty($compactlogourl),
-            'logodisplaymode' => $logodisplaymode
+            'haslogo' => !empty($logourl)
         ];
         
         // Add responsive logo dimensions if configured
@@ -162,36 +143,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
         
         return $this->render_from_template('theme_ufpel/navbar_brand', $templatecontext);
-    }
-
-    /**
-     * Get compact logo URL for mobile view.
-     * 
-     * Note: Method signature must match parent class in core\output\renderer_base
-     * to avoid fatal errors about incompatible declarations.
-     * 
-     * @param int $maxwidth The maximum width, defaults to 300.
-     * @param int $maxheight The maximum height, defaults to 300.
-     * @return moodle_url|null The compact logo URL or null if not set.
-     */
-    public function get_compact_logo_url($maxwidth = 300, $maxheight = 300) {
-        // Check for a specific compact/mobile logo
-        $compactlogo = $this->page->theme->setting_file_url('logo', 'logo');
-        
-        if (!empty($compactlogo)) {
-            if ($compactlogo instanceof \moodle_url) {
-                return $compactlogo;
-            }
-            
-            $logostr = (string)$compactlogo;
-            if (!empty($logostr)) {
-                // Parse and create proper moodle_url
-                return $this->process_logo_url($logostr);
-            }
-        }
-        
-        // Fall back to main logo with specified dimensions
-        return $this->get_logo_url($maxwidth, $maxheight);
     }
 
     /**

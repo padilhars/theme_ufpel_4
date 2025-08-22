@@ -133,10 +133,70 @@ a {
 .navbar {
     min-height: 60px;
     padding: 0;
+
+    &.fixed-top {
+        background-color: var(--ufpel-primary) !important;
+        border-bottom: 0;
+        color: var(--ufpel-text-highlight);
+    }
     
     // Ensure proper alignment of navbar items
     .navbar-nav {
         align-items: center;
+
+        .nav-item {
+
+            .nav-link {
+                color: var(--ufpel-text-highlight);
+                border: 0;
+
+                &.active {
+                    border-bottom: 3px solid var(--ufpel-highlight);
+
+                    &:after {
+                        content: "";
+                        position: relative;
+                        border-style: solid;
+                        border-top: 8px solid transparent;
+                        border-bottom: 8px solid transparent;
+                        border-left: 8px solid var(--ufpel-highlight);
+                        border-right: 0;
+                        right: calc(50% - 4px);
+                        bottom: -25px;
+                        transform: rotate(-90deg);
+                    }
+
+                    &:hover {
+                         &:after {
+                            border-left: 8px solid var(--ufpel-highlight);
+                         }
+                        background-color: transparent;
+                    }
+
+                }
+
+                &:hover {
+                    &:not(.active) {
+                        background-color: transparent;
+                        border-bottom: 0;
+                        transition: all .5s;
+
+                        &:after {
+                            content: "";
+                            position: relative;
+                            border-style: solid;
+                            border-top: 8px solid transparent;
+                            border-bottom: 8px solid transparent;
+                            border-left: 8px solid var(--ufpel-secondary-dark);
+                            border-right: 0;
+                            right: calc(50% - 4px);
+                            bottom: -25px;
+                            transform: rotate(-90deg);
+                        }
+                    }
+                }
+            }   
+        }
     }
     
     // Adjust spacing when logo is present

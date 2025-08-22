@@ -88,13 +88,6 @@ $string['logowidth'] = 'Largura do logo';
 $string['logowidth_desc'] = 'Defina uma largura personalizada para o logo em pixels. Deixe vazio para dimensionamento automático.';
 $string['showsitenamewithlogo'] = 'Mostrar nome do site com o logo';
 $string['showsitenamewithlogo_desc'] = 'Exibir o nome do site ao lado do logo na barra de navegação.';
-$string['compactlogo'] = 'Logo compacto';
-$string['compactlogo_desc'] = 'Uma versão menor do logo para dispositivos móveis. Se não configurado, o logo principal será usado.';
-$string['logodisplaymode'] = 'Modo de exibição do logo';
-$string['logodisplaymode_desc'] = 'Escolha como o logo deve ser exibido em diferentes tamanhos de tela.';
-$string['logodisplaymode_responsive'] = 'Responsivo (adapta-se ao tamanho da tela)';
-$string['logodisplaymode_fixed'] = 'Tamanho fixo';
-$string['logodisplaymode_compact'] = 'Sempre compacto';
 
 // Custom CSS/SCSS
 $string['customcss'] = 'CSS personalizado';
