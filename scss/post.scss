@@ -161,9 +161,11 @@ a {
                         border-bottom: 8px solid transparent;
                         border-left: 8px solid var(--ufpel-highlight);
                         border-right: 0;
-                        right: calc(50% - 4px);
+                        right: calc(50% + 3px);
                         bottom: -25px;
                         transform: rotate(-90deg);
+                        width: 8px;
+                        margin-right: -8px;
                     }
 
                     &:hover {
@@ -189,9 +191,11 @@ a {
                             border-bottom: 8px solid transparent;
                             border-left: 8px solid var(--ufpel-secondary-dark);
                             border-right: 0;
-                            right: calc(50% - 4px);
-                            bottom: -25px;
+                            right: calc(50% + 3px);
+                            bottom: -26px;
                             transform: rotate(-90deg);
+                            width: 8px;
+                            margin-right: -8px;
                         }
                     }
                 }

@@ -214,7 +214,6 @@ $THEME->enable_dock = false;
 $THEME->presetsfiles = [
     'default.scss',
     'dark.scss',
-    'plain.scss',
 ];
 
 // Hide from theme selector (set to false for production)

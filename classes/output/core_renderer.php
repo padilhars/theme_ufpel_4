@@ -150,7 +150,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * 
      * @param string $logostr The logo URL string.
      * @return moodle_url|null Processed moodle_url or null.
-     */
     protected function process_logo_url($logostr) {
         global $CFG;
         
@@ -194,6 +193,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
             return new \moodle_url($logostr);
         }
     }
+    */
     
     /**
      * Returns HTML to display the main header.
@@ -376,8 +376,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
     /**
      * Get the main logo URL for the footer.
      *
-     * @return string|null
-     */
+     * @return string|null 
     public function get_footer_logo_url() {
         $logo = $this->page->theme->setting_file_url('footerlogo', 'footerlogo');
         if (!empty($logo)) {
@@ -395,6 +394,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
         }
         return null;
     }
+    */
     
     /**
      * Get social media links for footer.
@@ -427,7 +427,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
      *
      * @param stdClass|null $user The user object
      * @return array|string The user menu
-     */
+     
     public function construct_user_menu($user = null) {
         // Get the parent menu first
         $usermenu = parent::construct_user_menu($user);
@@ -457,7 +457,6 @@ class core_renderer extends \theme_boost\output\core_renderer {
      * 
      * @param array|\stdClass $templatecontext The template context
      * @return array|\stdClass Modified template context
-     */
     public function login_templatecontext($templatecontext = null) {
         // Get parent context first
         if (method_exists(get_parent_class($this), 'login_templatecontext')) {
@@ -490,4 +489,5 @@ class core_renderer extends \theme_boost\output\core_renderer {
         
         return $templatecontext;
     }
+    */
 }

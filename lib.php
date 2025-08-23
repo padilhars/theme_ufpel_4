@@ -373,7 +373,7 @@ function theme_ufpel_page_init(moodle_page $page) {
  * Check if dark mode should be used.
  *
  * @return bool
- */
+ *
 function theme_ufpel_should_use_dark_mode() {
     // Check user preference first
     $userpref = get_user_preferences('theme_ufpel_darkmode', null);
@@ -384,6 +384,7 @@ function theme_ufpel_should_use_dark_mode() {
     // Check system setting
     return (bool)get_config('theme_ufpel', 'enabledarkmode');
 }
+*/
 
 /**
  * Process a file URL to ensure it's not duplicated.
@@ -392,7 +393,7 @@ function theme_ufpel_should_use_dark_mode() {
  *
  * @param mixed $url The URL to process (can be string, moodle_url, or null)
  * @return string|null The processed URL string or null if empty
- */
+ *
 function theme_ufpel_process_file_url($url) {
     if (empty($url)) {
         return null;
@@ -436,6 +437,7 @@ function theme_ufpel_process_file_url($url) {
         return $urlstr;
     }
 }
+*/
 
 /**
  * Validate and clean a file URL to ensure it's properly formatted.
@@ -443,7 +445,7 @@ function theme_ufpel_process_file_url($url) {
  *
  * @param string $url The URL to validate
  * @return string|false The cleaned URL or false if invalid
- */
+ *
 function theme_ufpel_validate_file_url($url) {
     if (empty($url)) {
         return false;
@@ -515,7 +517,7 @@ function theme_ufpel_validate_file_url($url) {
     
     return $cleanurl;
 }
-
+*/
 // Add this to the existing lib.php file, do not duplicate the entire file
 // These are helper functions to be added to the existing lib.php
 
@@ -525,7 +527,7 @@ function theme_ufpel_validate_file_url($url) {
  *
  * @param mixed $url The URL to process (can be string or moodle_url)
  * @return moodle_url|null The processed moodle_url object or null if empty
- */
+ *
 function theme_ufpel_process_theme_file_url($url) {
     global $CFG;
     
@@ -580,13 +582,14 @@ function theme_ufpel_process_theme_file_url($url) {
         return new moodle_url($urlstr);
     }
 }
+*/
 
 /**
  * Safely convert a theme file URL to a string without duplication.
  *
  * @param mixed $url The URL to convert (can be string, moodle_url, or null)
  * @return string|null The URL string or null if empty
- */
+ *
 function theme_ufpel_url_to_string($url) {
     if (empty($url)) {
         return null;
@@ -638,3 +641,4 @@ function theme_ufpel_url_to_string($url) {
     
     return $urlstr;
 }
+*/

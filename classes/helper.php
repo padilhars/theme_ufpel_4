@@ -164,7 +164,6 @@ class helper {
      * Get a list of available presets.
      *
      * @return array Array of preset files.
-     */
     public static function get_available_presets() {
         global $CFG;
         
@@ -192,7 +191,6 @@ class helper {
      * Check if the current page should use dark mode.
      *
      * @return bool True if dark mode should be used.
-     */
     public static function should_use_dark_mode() {
         // Check user preference.
         $userpref = get_user_preferences('theme_ufpel_darkmode', null);
@@ -209,12 +207,11 @@ class helper {
      * Get optimized inline CSS for critical rendering path.
      *
      * @return string Critical CSS.
-     */
     public static function get_critical_css() {
         $settings = self::get_theme_settings();
         
         $css = "
-        /* Critical CSS for UFPel Theme */
+        // Critical CSS for UFPel Theme
         :root {
             --ufpel-primary: {$settings->primarycolor};
             --ufpel-secondary: {$settings->secondarycolor};
@@ -246,4 +243,5 @@ class helper {
         
         return preg_replace('/\s+/', ' ', trim($css));
     }
+    */
 }
